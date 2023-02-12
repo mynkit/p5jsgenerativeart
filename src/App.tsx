@@ -18,6 +18,7 @@ const sketch = (p: p5) => {
   let theta: number;
   let alpha: number;
   let time: number;
+  let penSpeed: number;
   let sizeTras: number;
 
   p.setup = () => {
@@ -32,16 +33,17 @@ const sketch = (p: p5) => {
     theta = 0;
     alpha = 0;
     time = 0;
+    penSpeed = 1.5;
     sizeTras = p.min(width, height) / 1000;
-    p.strokeWeight(sizeTras);
+    p.strokeWeight(p.min(sizeTras, 1));
   };
 
   p.draw = () => {
     let centerX, centerY;
     let newX, newY;
 
-    r += p.random(-0.1, 0.2)*0.1;
-    theta += 0.1;
+    r += p.random(-0.1, 0.2)*0.1*penSpeed;
+    theta += 0.1*penSpeed;
     centerX = width/2 + 0.1*(0.05*time*p.sin(time*0.1) + 0.001*time*p.sin(time*0.01));
     centerY = height/2 - 0.05*(0.1*2.*p.sqrt(p.sqrt(time/10))*p.abs(p.sin(time * 0.05)) + 0.001*time*p.cos(time*0.001));
 
@@ -52,7 +54,7 @@ const sketch = (p: p5) => {
     centerY = height/2 + p.sin(alpha)*(centerX-width/2) + p.cos(alpha)*(centerY-height/2);
 
     alpha = time*0.0004;
-    time += 1;
+    time += 1*penSpeed;
 
     newX = centerX + 1*r*p.cos(theta);
     newY = centerY + 1*r*p.sin(theta)*0.5;
