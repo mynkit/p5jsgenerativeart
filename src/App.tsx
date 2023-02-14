@@ -9,16 +9,19 @@ import {
 import Grid from '@mui/material/Grid';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 type MySketchProps = SketchProps & {
   penSpeed: number;
   pause: boolean;
+  clear: boolean;
 };
 
 const App = () => {
-  const [penSpeed, setPenSpeed] = useState(1);
-  const [penSpeedIndex, setPenSpeedIndex] = useState(0);
+  const [penSpeed, setPenSpeed] = useState(2);
+  const [penSpeedIndex, setPenSpeedIndex] = useState(1);
   const [pause, setPause] = useState(true);
+  const [clear, setClear] = useState(true);
   const penSpeedList = [
     1, 2, 5.25, 7.85, 9,
     10.5,
@@ -37,9 +40,21 @@ const App = () => {
   return (
     <div className="App">
       <Grid style={{position: 'fixed', width: '100%', maxWidth: '100%', height: '100%'}}>
+        {/* 初期化 */}
+        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', left: '0px', width: '0'}}>
+          <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
+            setClear(true);
+            setPause(true);
+          }}>
+            <RestartAltIcon fontSize="large"/>
+          </Grid>
+        </Grid>
         {/* 再生停止制御 */}
         <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', bottom: '0px', left: '0px', width: '0', zIndex: '10', marginBottom: '20px'}}>
-          <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{setPause(v=>!v)}}>
+          <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
+            if(pause){setClear(false);}
+            setPause(v=>!v);
+          }}>
             {pause ? <PlayArrowIcon fontSize="large"/> : <PauseIcon fontSize="large"/>}
           </Grid>
         </Grid>
@@ -65,7 +80,7 @@ const App = () => {
           </Grid>
         </Grid>
       </Grid>
-      <ReactP5Wrapper sketch={sketch} penSpeed={penSpeed} pause={pause}></ReactP5Wrapper>
+      <ReactP5Wrapper sketch={sketch} penSpeed={penSpeed} pause={pause} clear={clear}></ReactP5Wrapper>
     </div>
   );
 }
@@ -82,6 +97,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let penSpeed: number = 2;
   let sizeTras: number = p.min(width, height) / 1000;
   let pause: boolean = true;
+  let clear: boolean = true;
 
   p.setup = () => {
     p.createCanvas(width, height);
@@ -96,9 +112,23 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     if (props.pause!==undefined) {
       pause = props.pause;
     }
+    if (props.clear!==undefined) {
+      clear = props.clear;
+    }
   };
 
   p.draw = () => {
+    if (clear) {
+      p.clear(255, 255, 255, 255);
+      x = width / 2;
+      y = height / 2;
+      r = 0;
+      theta = 0;
+      alpha = 0;
+      time = 0;
+      pause = true;
+      return;
+    }
     if (pause) {return;}
 
     let centerX, centerY;
