@@ -16,9 +16,24 @@ type MySketchProps = SketchProps & {
 };
 
 const App = () => {
-  const [penSpeed, setPenSpeed] = useState(3);
+  const [penSpeed, setPenSpeed] = useState(1);
+  const [penSpeedIndex, setPenSpeedIndex] = useState(0);
   const [pause, setPause] = useState(true);
-  
+  const penSpeedList = [
+    1, 2, 5.25, 7.85, 9,
+    10.5,
+    12.6,
+    15.6,
+    Math.floor((20.85+0.3*Math.random()) * 100) / 100
+  ];
+  useEffect(() => {
+    if(penSpeedIndex>=0 && penSpeedIndex<penSpeedList.length) {
+      setPenSpeed(penSpeedList[penSpeedIndex])
+    }else{
+      console.log(`error.. penSpeedIndex: ${penSpeedIndex} is out of range.`);
+    }
+  }, [penSpeedIndex])
+
   return (
     <div className="App">
       <Grid style={{position: 'fixed', width: '100%', maxWidth: '100%', height: '100%'}}>
@@ -32,8 +47,8 @@ const App = () => {
         <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', bottom: '0px', right: '0px', width: '750px', maxWidth: '100%', marginBottom: '25px'}}>
           <Grid item xs={12-4.5} />
           <Grid item xs={1} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
-            if (penSpeed>1) {
-              setPenSpeed(v=>v-0.5);
+            if (penSpeedIndex>0) {
+              setPenSpeedIndex(v=>v-1);
             }
           }}>
             <p style={{fontSize: '15pt', margin: '0px'}}>{'◁'}</p>
@@ -42,7 +57,9 @@ const App = () => {
             <p style={{fontSize: '20pt', margin: '0px'}}>{penSpeed}</p>
           </Grid>
           <Grid item xs={1} style={{textAlign: 'center', cursor: 'pointer'}} alignItems={'center'} onClick={()=>{
-            setPenSpeed(v=>v+0.5);
+            if (penSpeedIndex<penSpeedList.length-1) {
+              setPenSpeedIndex(v=>v+1);
+            }
           }}>
             <p style={{fontSize: '15pt', margin: '0px'}}>{'▷'}</p>
           </Grid>
