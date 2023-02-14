@@ -1,41 +1,70 @@
-import p5 from 'p5';
-import { ReactP5Wrapper } from 'react-p5-wrapper';
+import React, { useEffect, useState } from "react";
+import {
+  P5CanvasInstance,
+  ReactP5Wrapper,
+  SketchProps,
+  Sketch
+} from "react-p5-wrapper";
+import Grid from '@mui/material/Grid';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+type MySketchProps = SketchProps & {
+  penSpeed: number;
+};
 
 const App = () => {
+  const [penSpeed, setPenSpeed] = useState(3);
+  
   return (
     <div className="App">
-      <ReactP5Wrapper sketch={sketch}></ReactP5Wrapper>
+      <Grid style={{position: 'fixed', width: '500px', maxWidth: '100%', height: '100vh'}}>
+        <Grid container alignItems={'center'} style={{padding: '10px', textAlign: 'center', position: 'absolute', bottom: '0px'}}>
+        <Grid item xs={12-3.5} />
+          <Grid item xs={1} style={{textAlign: 'center'}} onClick={()=>{
+            if (penSpeed>1) {
+              setPenSpeed(v=>v-0.5);
+            }
+          }}>
+            <ArrowBackIcon/>
+          </Grid>
+          <Grid item xs={1.5} alignItems={'center'}>
+            <p style={{fontSize: '15pt'}}>{penSpeed}</p>
+          </Grid>
+          <Grid item xs={1} alignItems={'center'} onClick={()=>{
+            setPenSpeed(v=>v+0.5);
+          }}>
+            <ArrowForwardIcon/>
+          </Grid>
+        </Grid>
+      </Grid>
+      <ReactP5Wrapper sketch={sketch} penSpeed={penSpeed}></ReactP5Wrapper>
     </div>
   );
 }
 
-const sketch = (p: p5) => {
-  let width: number;
-  let height: number;
-  let x: number;
-  let y: number;
-  let r: number;
-  let theta: number;
-  let alpha: number;
-  let time: number;
-  let penSpeed: number;
-  let sizeTras: number;
+const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
+  let width: number = p.windowWidth;
+  let height: number = p.windowHeight;
+  let x: number = width / 2;
+  let y: number = height / 2;
+  let r: number = 0;
+  let theta: number = 0;
+  let alpha: number = 0;
+  let time: number = 0;
+  let penSpeed: number = 2;
+  let sizeTras: number = p.min(width, height) / 1000;
 
   p.setup = () => {
-    width = p.windowWidth;
-    height = p.windowHeight;
-    console.log(width, height);
     p.createCanvas(width, height);
     p.fill(0);
-    x = width / 2;
-    y = height / 2;
-    r = 0;
-    theta = 0;
-    alpha = 0;
-    time = 0;
-    penSpeed = 1.5;
-    sizeTras = p.min(width, height) / 1000;
     p.strokeWeight(p.min(sizeTras, 1));
+  };
+
+  p.updateWithProps = (props: any) => {
+    if (props.penSpeed) {
+      penSpeed = props.penSpeed;
+    }
   };
 
   p.draw = () => {
