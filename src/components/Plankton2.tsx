@@ -104,7 +104,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   p.updateWithProps = (props: any) => {
     if (props.yFreq) {
       yFreq = props.yFreq;
-      penSpeed = p.min(1, 1 / yFreq) * 0.1;
+      penSpeed = p.min(1, p.sqrt(1 / yFreq)) * 0.1;
     }
     if (props.pause!==undefined) {
       pause = props.pause;
