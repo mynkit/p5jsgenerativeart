@@ -89,7 +89,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let r: number = 0;
   let theta: number = 0;
   let time: number = 0;
-  let penSpeed: number = 0.01;
+  let penSpeed: number = 1;
   let yFreq: number = 1.5;
   let sizeTras: number = p.min(width, height) / 1400;
   let pause: boolean = true;
@@ -104,7 +104,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   p.updateWithProps = (props: any) => {
     if (props.yFreq) {
       yFreq = props.yFreq;
-      penSpeed = p.min(1, 1 / yFreq);
+      penSpeed = p.min(1, 1 / yFreq) * 0.1;
     }
     if (props.pause!==undefined) {
       pause = props.pause;
@@ -127,7 +127,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     }
     if (pause) {return;}
 
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<50; i++) {
       let centerX, centerY;
       let newX, newY;
 
