@@ -101,7 +101,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   p.setup = () => {
     p.createCanvas(width, height);
     p.fill(0);
-    p.strokeWeight(p.min(sizeTras, 1));
+    p.strokeWeight(p.min(sizeTras, 1)*0.5);
   };
 
   p.updateWithProps = (props: any) => {
