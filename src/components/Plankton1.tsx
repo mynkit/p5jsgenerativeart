@@ -17,12 +17,12 @@ type MySketchProps = SketchProps & {
 };
 
 const Plankton1 = () => {
-  const [penSpeed, setPenSpeed] = useState(2);
-  const [penSpeedIndex, setPenSpeedIndex] = useState(1);
+  const [penSpeed, setPenSpeed] = useState(1);
+  const [penSpeedIndex, setPenSpeedIndex] = useState(0);
   const [pause, setPause] = useState(true);
   const [clear, setClear] = useState(true);
   const penSpeedList = [
-    1, 2, 5.25, 7.85, 9,
+    1, 5.25, 7.85, 9,
     10.5,
     12.6,
     15.6,
@@ -130,34 +130,49 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     }
     if (pause) {return;}
 
-    let centerX, centerY;
-    let newX, newY;
+    let acceleration = 1;
 
-    r += p.random(-0.1, 0.2)*0.1*penSpeed;
-    theta += 0.1*penSpeed;
-    centerX = width/2 + 0.1*(0.05*time*p.sin(time*0.1) + 0.001*time*p.sin(time*0.01));
-    centerY = height/2 - 0.05*(0.1*2.*p.sqrt(p.sqrt(time/10))*p.abs(p.sin(time * 0.05)) + 0.001*time*p.cos(time*0.001));
+    if (penSpeed===1) {
+      acceleration = 10;
+    } else if (penSpeed<8) {
+      acceleration = 3;
+    } else if (penSpeed<15) {
+      acceleration = 2;
+    } else {
+      acceleration = 1;
+    }
 
-    centerY += 0.01*time;
+    for (let i=0; i<acceleration; i++) {
+      let centerX, centerY;
+      let newX, newY;
 
-    // 回転
-    centerX = width/2 + p.cos(alpha)*(centerX-width/2) - p.sin(alpha)*(centerY-height/2);
-    centerY = height/2 + p.sin(alpha)*(centerX-width/2) + p.cos(alpha)*(centerY-height/2);
+      r += p.random(-0.1, 0.2)*0.1*penSpeed;
+      theta += 0.1*penSpeed;
+      centerX = width/2 + 0.1*(0.05*time*p.sin(time*0.1) + 0.001*time*p.sin(time*0.01));
+      centerY = height/2 - 0.05*(0.1*2.*p.sqrt(p.sqrt(time/10))*p.abs(p.sin(time * 0.05)) + 0.001*time*p.cos(time*0.001));
 
-    alpha = time*0.0004;
-    time += 1*penSpeed;
+      centerY += 0.01*time;
 
-    newX = centerX + 1*r*p.cos(theta);
-    newY = centerY + 1*r*p.sin(theta)*0.5;
+      // 回転
+      centerX = width/2 + p.cos(alpha)*(centerX-width/2) - p.sin(alpha)*(centerY-height/2);
+      centerY = height/2 + p.sin(alpha)*(centerX-width/2) + p.cos(alpha)*(centerY-height/2);
 
-    // サイズ調整
-    newX = width/2 + (newX - width/2) * sizeTras;
-    newY = height/2 + (newY - height/2) * sizeTras;
+      alpha = time*0.0004;
+      time += 1*penSpeed;
 
-    p.line(x, y, newX, newY);
+      newX = centerX + 1*r*p.cos(theta);
+      newY = centerY + 1*r*p.sin(theta)*0.5;
 
-    x = newX;
-    y = newY;
+      // サイズ調整
+      newX = width/2 + (newX - width/2) * sizeTras;
+      newY = height/2 + (newY - height/2) * sizeTras;
+
+      p.line(x, y, newX, newY);
+
+      x = newX;
+      y = newY;
+    }
+
   }
 }
 

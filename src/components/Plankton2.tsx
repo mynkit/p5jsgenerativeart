@@ -89,7 +89,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let r: number = 0;
   let theta: number = 0;
   let time: number = 0;
-  let penSpeed: number = 1;
+  let penSpeed: number = 0.01;
   let yFreq: number = 1.5;
   let sizeTras: number = p.min(width, height) / 1400;
   let pause: boolean = true;
@@ -127,27 +127,30 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     }
     if (pause) {return;}
 
-    let centerX, centerY;
-    let newX, newY;
+    for (let i=0; i<5; i++) {
+      let centerX, centerY;
+      let newX, newY;
 
-    r += p.random(-0.1, 0.2)*penSpeed;
-    theta += 0.1*penSpeed;
-    centerX = width/2 + 400.*p.sin(time*0.1) + 0.001*time*p.sin(time*0.001);
-    centerY = height/2 + 20.*p.sqrt(p.sqrt(time/10))*p.sin(time * 0.1 * yFreq);
+      r += p.random(-0.1, 0.2)*penSpeed;
+      theta += 0.1*penSpeed;
+      centerX = width/2 + 400.*p.sin(time*0.1) + 0.001*time*p.sin(time*0.001);
+      centerY = height/2 + 20.*p.sqrt(p.sqrt(time/10))*p.sin(time * 0.1 * yFreq);
 
-    time += 1*penSpeed;
+      time += 1*penSpeed;
 
-    newX = centerX + 1*r*p.cos(theta);
-    newY = centerY + 1*r*p.sin(theta)*0.5;
+      newX = centerX + 1*r*p.cos(theta);
+      newY = centerY + 1*r*p.sin(theta)*0.5;
 
-    // サイズ調整
-    newX = width/2 + (newX - width/2) * sizeTras;
-    newY = height/2 + (newY - height/2) * sizeTras;
+      // サイズ調整
+      newX = width/2 + (newX - width/2) * sizeTras;
+      newY = height/2 + (newY - height/2) * sizeTras;
 
-    p.line(x, y, newX, newY);
+      p.line(x, y, newX, newY);
 
-    x = newX;
-    y = newY;
+      x = newX;
+      y = newY;
+    }
+    
   }
 }
 
