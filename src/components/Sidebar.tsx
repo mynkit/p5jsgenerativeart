@@ -34,6 +34,7 @@ var styles = {
     padding: '2.5em 1.5em 0',
     fontSize: '1.15em',
     overflowY: 'hidden',
+    textAlign: 'left'
   },
   bmMorphShape: {
     fill: '#ffffff'
@@ -75,6 +76,13 @@ const Sidebar: React.FC<SidebarProps> = ({ target, setTarget }) => {
   }
   return (
     <Menu styles={ bmStyles } right isOpen={isOpen} onOpen={handleIsOpen} onClose={closeSideBar}>
+      <a className="menu-item"
+        onClick={()=>{selectMenu('')}}
+        onKeyDown={(e)=>{if (e.key === 'Enter') selectMenu('')}}
+        style={target==='' ? {textDecoration: 'underline'} : {textDecoration: ''}}
+      >
+        Home
+      </a>
       <a className="menu-item"
         onClick={()=>{selectMenu('plankton1')}}
         onKeyDown={(e)=>{if (e.key === 'Enter') selectMenu('plankton1')}}
