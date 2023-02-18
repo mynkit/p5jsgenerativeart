@@ -26,9 +26,9 @@ const Plankton3: React.FC<Props> = ({ start, setTarget }) => {
   const [pause, setPause] = useState(!start);
   const [clear, setClear] = useState(!start);
   const [yFreq, setYFreq] = useState(2.5);
-  const [yFreqIndex, setYFreqIndex] = useState(2);
+  const [yFreqIndex, setYFreqIndex] = useState(1);
   const yFreqList = [
-    1, 2, 2.5, 3, 4, 5, 6
+    2, 2.5, 3, 4, 5, 6
   ];
   useEffect(() => {
     if(yFreqIndex>=0 && yFreqIndex<yFreqList.length) {
