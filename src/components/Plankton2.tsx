@@ -143,7 +143,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     }
     if (pause) {return;}
 
-    for (let i=0; i<50; i++) {
+    for (let i=0; i<100; i++) {
       let centerX, centerY;
       let newX, newY;
 
