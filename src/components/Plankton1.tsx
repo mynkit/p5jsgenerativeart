@@ -149,7 +149,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     let acceleration = 1;
 
     if (penSpeed===1) {
-      acceleration = 10;
+      acceleration = 15;
     } else if (penSpeed<8) {
       acceleration = 3;
     } else if (penSpeed<15) {
@@ -157,6 +157,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
     } else {
       acceleration = 1;
     }
+    acceleration *= 1.5;
 
     for (let i=0; i<acceleration; i++) {
       let centerX, centerY;
