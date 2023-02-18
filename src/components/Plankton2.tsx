@@ -43,7 +43,7 @@ const Plankton2: React.FC<Props> = ({ start, setTarget }) => {
     <div>
       <Grid style={{position: 'fixed', width: '100%', maxWidth: '100%', height: '100%'}}>
         {/* ホーム画面に戻る */}
-        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', left: '0px', width: '0'}}>
+        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', left: '0px', width: '0', zIndex: '10'}}>
           <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
             setTarget('');
           }}>
