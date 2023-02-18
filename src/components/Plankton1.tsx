@@ -49,6 +49,7 @@ const Plankton1: React.FC<Props> = ({ start, setTarget }) => {
         <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', left: '0px', width: '0', zIndex: '10'}}>
           <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
             setTarget('');
+            window.history.replaceState(null,'',`/`);
           }}>
             <ArrowBackIcon fontSize="large"/>
           </Grid>
