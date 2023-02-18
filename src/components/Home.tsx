@@ -34,7 +34,7 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart }) => {
         <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer'}} src={`/thumb/plankton1-${randint(1,3)}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
         <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer'}} src={`/thumb/plankton2-${randint(1,3)}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
       </Grid>
-      <Grid container justifyContent='center' style={{columnGap: '20px'}}>
+      <Grid container justifyContent='center' style={{columnGap: '20px', paddingTop: '20px'}}>
         <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer'}} src={`/thumb/plankton3-${randint(1,3)}.png`} alt="plankton3" onClick={()=>imgClick('plankton3')}/>
       </Grid>
     </div>
