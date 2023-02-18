@@ -16,11 +16,15 @@ type MySketchProps = SketchProps & {
   clear: boolean;
 };
 
-const Plankton1 = () => {
+type Props = {
+  start: boolean;
+}
+
+const Plankton1: React.FC<Props> = ({ start }) => {
   const [penSpeed, setPenSpeed] = useState(1);
   const [penSpeedIndex, setPenSpeedIndex] = useState(0);
-  const [pause, setPause] = useState(false);
-  const [clear, setClear] = useState(false);
+  const [pause, setPause] = useState(!start);
+  const [clear, setClear] = useState(!start);
   const penSpeedList = [
     1, 5.25, 7.85, 9,
     10.5,
@@ -95,8 +99,8 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let time: number = 0;
   let penSpeed: number = 2;
   let sizeTras: number = p.min(width, height) / 1000;
-  let pause: boolean = false;
-  let clear: boolean = false;
+  let pause: boolean = true;
+  let clear: boolean = true;
 
   p.setup = () => {
     p.createCanvas(width, height);

@@ -57,9 +57,10 @@ var styles = {
 type SidebarProps = {
   target: string;
   setTarget: React.Dispatch<React.SetStateAction<string>>;
+  setStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ target, setTarget }) => {
+const Sidebar: React.FC<SidebarProps> = ({ target, setTarget, setStart }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [bmStyles, setBmStyles] = useState(styles);
   const largeWidth = 1400;
@@ -71,6 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ target, setTarget }) => {
   }
   const selectMenu = (target: string) => {
     setTarget(target);
+    setStart(false);
     window.history.replaceState(null,'',`/${target}`);
     setIsOpen(false);
   }

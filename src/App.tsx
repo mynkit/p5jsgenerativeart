@@ -8,15 +8,19 @@ import Home from './components/Home';
 
 const GenerativeArt: React.FC<Props> = ({ targetPage }) => {
   const [target, setTarget] = useState(targetPage);
+  const [start, setStart] = useState(false);
+  // useEffect(() => {
+  //   console.log(start);
+  // }, [start])
   return (
     <div className="App">
-      <Sidebar target={target} setTarget={setTarget}/>
+      <Sidebar target={target} setTarget={setTarget} setStart={setStart}/>
       {target==='' ?
-      <Home target={target} setTarget={setTarget}/>
+      <Home setTarget={setTarget} setStart={setStart}/>
       : target==='plankton1' ?
-      <Plankton1/>
+      <Plankton1 start={start}/>
       : target==='plankton2' ?
-      <Plankton2/>
+      <Plankton2 start={start}/>
       : <></>
       }
     </div>

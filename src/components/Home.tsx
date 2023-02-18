@@ -2,17 +2,18 @@ import React from 'react'
 import Grid from '@mui/material/Grid';
 
 type HomeProps = {
-  target: string;
   setTarget: React.Dispatch<React.SetStateAction<string>>;
+  setStart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const randint = (min: number, max: number) => {
   return Math.floor( Math.random() * (max + 1 - min) ) + min;
 }
 
-const Home: React.FC<HomeProps> = ({ setTarget }) => {
+const Home: React.FC<HomeProps> = ({ setTarget, setStart }) => {
   const imgClick = (target: string)  => {
     setTarget(target);
+    setStart(true);
     window.history.replaceState(null,'',`/${target}`);
   }
   return (

@@ -16,11 +16,15 @@ type MySketchProps = SketchProps & {
   clear: boolean;
 };
 
-const Plankton2 = () => {
+type Props = {
+  start: boolean;
+}
+
+const Plankton2: React.FC<Props> = ({ start }) => {
   const [yFreq, setYFreq] = useState(1.5);
   const [yFreqIndex, setYFreqIndex] = useState(2);
-  const [pause, setPause] = useState(false);
-  const [clear, setClear] = useState(false);
+  const [pause, setPause] = useState(!start);
+  const [clear, setClear] = useState(!start);
   const yFreqList = [
     0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4,
     4.5, 5, 6, 7, 8,
@@ -92,8 +96,8 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let penSpeed: number = 1;
   let yFreq: number = 1.5;
   let sizeTras: number = p.min(width, height) / 1400;
-  let pause: boolean = false;
-  let clear: boolean = false;
+  let pause: boolean = true;
+  let clear: boolean = true;
 
   p.setup = () => {
     p.createCanvas(width, height);
