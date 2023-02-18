@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@mui/material/Grid';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 type HomeProps = {
   setTarget: React.Dispatch<React.SetStateAction<string>>;
@@ -20,12 +21,15 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart, setIndex1, setIndex2, 
     setStart(true);
     window.history.replaceState(null,'',`/${target}`);
   }
-  useEffect(() => {
+  const reload = () => {
     setRandints([
       randint(1,3),
       randint(1,3),
       randint(1,3),
     ]);
+  }
+  useEffect(() => {
+    reload();
   }, [])
   useEffect(() => {
     switch (randints[0]) {
@@ -63,27 +67,40 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart, setIndex1, setIndex2, 
     }
   }, [randints])
   return (
-    <div style={{padding: '17px'}}>
-      <Grid container justifyContent='left' alignItems='center' style={{columnGap: '10px'}}>
-        {/* <img src='/logo/profile400.jpg' height='35px'/> */}
-        <p style={{fontSize: '16pt', margin: '0', padding: '0', height: '100%', textAlign: 'left'}}>Generative Art</p>
+    <>
+      <Grid style={{position: 'relative', width: '100%', maxWidth: '100%', height: '100%'}}>
+        {/* 初期化 */}
+        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', right: '0px', width: '750px', maxWidth: '100%'}}>
+          <Grid item xs={11} />
+          <Grid item xs={1} style={{textAlign: 'center', cursor: 'pointer'}} alignItems={'center'} onClick={()=>{
+            reload();
+          }}>
+            <RestartAltIcon fontSize="large"/>
+          </Grid>
+        </Grid>
       </Grid>
-      <Grid container justifyContent='left' alignItems='center' style={{columnGap: '0px'}}>
-        <p style={{fontSize: '10pt', margin: '0', paddingTop: '10px', paddingBottom: '10px', height: '100%', textAlign: 'left'}}>
-          made by
-        </p>
-        <a href='https://keita-miyano.async-studio.com/' target="_blank" rel="noopener noreferrer" style={{height: '30px'}}>
-          <img src='/logo/logo_keitamiyano_rgb_1-5.png' height='100%'/>
-        </a>
-      </Grid>
-      <Grid container justifyContent='center'>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton1-${randints[0]}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton2-${randints[1]}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
-      </Grid>
-      <Grid container justifyContent='center'>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton3-${randints[2]}.png`} alt="plankton3" onClick={()=>imgClick('plankton3')}/>
-      </Grid>
-    </div>
+      <div style={{padding: '17px'}}>
+        <Grid container justifyContent='left' alignItems='center' style={{columnGap: '10px'}}>
+          {/* <img src='/logo/profile400.jpg' height='35px'/> */}
+          <p style={{fontSize: '16pt', margin: '0', padding: '0', height: '100%', textAlign: 'left'}}>Generative Art</p>
+        </Grid>
+        <Grid container justifyContent='left' alignItems='center' style={{columnGap: '0px'}}>
+          <p style={{fontSize: '10pt', margin: '0', paddingTop: '10px', paddingBottom: '10px', height: '100%', textAlign: 'left'}}>
+            made by
+          </p>
+          <a href='https://keita-miyano.async-studio.com/' target="_blank" rel="noopener noreferrer" style={{height: '30px'}}>
+            <img src='/logo/logo_keitamiyano_rgb_1-5.png' height='100%'/>
+          </a>
+        </Grid>
+        <Grid container justifyContent='center'>
+          <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton1-${randints[0]}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
+          <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton2-${randints[1]}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
+        </Grid>
+        <Grid container justifyContent='center'>
+          <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton3-${randints[2]}.png`} alt="plankton3" onClick={()=>imgClick('plankton3')}/>
+        </Grid>
+      </div>
+    </>
   )
 }
 
