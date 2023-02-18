@@ -111,7 +111,7 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let alpha: number = 0;
   let time: number = 0;
   let penSpeed: number = 2;
-  let sizeTras: number = p.min(width, height) / 1000;
+  let sizeTras: number = p.min(width, height) / 870;
   let pause: boolean = true;
   let clear: boolean = true;
 
