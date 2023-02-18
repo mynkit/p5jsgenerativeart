@@ -19,8 +19,8 @@ type MySketchProps = SketchProps & {
 const Plankton2 = () => {
   const [yFreq, setYFreq] = useState(1.5);
   const [yFreqIndex, setYFreqIndex] = useState(2);
-  const [pause, setPause] = useState(true);
-  const [clear, setClear] = useState(true);
+  const [pause, setPause] = useState(false);
+  const [clear, setClear] = useState(false);
   const yFreqList = [
     0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4,
     4.5, 5, 6, 7, 8,
@@ -92,8 +92,8 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let penSpeed: number = 1;
   let yFreq: number = 1.5;
   let sizeTras: number = p.min(width, height) / 1400;
-  let pause: boolean = true;
-  let clear: boolean = true;
+  let pause: boolean = false;
+  let clear: boolean = false;
 
   p.setup = () => {
     p.createCanvas(width, height);

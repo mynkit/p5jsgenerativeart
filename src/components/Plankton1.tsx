@@ -19,8 +19,8 @@ type MySketchProps = SketchProps & {
 const Plankton1 = () => {
   const [penSpeed, setPenSpeed] = useState(1);
   const [penSpeedIndex, setPenSpeedIndex] = useState(0);
-  const [pause, setPause] = useState(true);
-  const [clear, setClear] = useState(true);
+  const [pause, setPause] = useState(false);
+  const [clear, setClear] = useState(false);
   const penSpeedList = [
     1, 5.25, 7.85, 9,
     10.5,
@@ -95,8 +95,8 @@ const sketch: Sketch<MySketchProps> = (p: P5CanvasInstance<MySketchProps>) => {
   let time: number = 0;
   let penSpeed: number = 2;
   let sizeTras: number = p.min(width, height) / 1000;
-  let pause: boolean = true;
-  let clear: boolean = true;
+  let pause: boolean = false;
+  let clear: boolean = false;
 
   p.setup = () => {
     p.createCanvas(width, height);
