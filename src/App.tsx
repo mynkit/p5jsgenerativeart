@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Plankton1 from './components/Plankton1';
 import Plankton2 from './components/Plankton2';
+import Plankton3 from './components/Plankton3';
 import Home from './components/Home';
 
 const GenerativeArt: React.FC<Props> = ({ targetPage }) => {
@@ -16,6 +17,8 @@ const GenerativeArt: React.FC<Props> = ({ targetPage }) => {
       <Plankton1 start={start} setTarget={setTarget}/>
       : target==='plankton2' ?
       <Plankton2 start={start} setTarget={setTarget}/>
+      : target==='plankton3' ?
+      <Plankton3 start={start} setTarget={setTarget}/>
       : <></>
       }
     </div>
@@ -33,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/" element={<GenerativeArt targetPage='' />} />
         <Route path="/plankton1" element={<GenerativeArt targetPage='plankton1' />} />
         <Route path="/plankton2" element={<GenerativeArt targetPage='plankton2' />} />
+        <Route path="/plankton3" element={<GenerativeArt targetPage='plankton3' />} />
       </Routes>
     </BrowserRouter>
   )
