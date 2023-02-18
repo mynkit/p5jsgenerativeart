@@ -70,8 +70,8 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart, setIndex1, setIndex2, 
     <>
       <Grid style={{position: 'relative', width: '100%', maxWidth: '100%', height: '100%'}}>
         {/* 初期化 */}
-        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', right: '0px', width: '750px', maxWidth: '100%'}}>
-          <Grid item xs={11} />
+        <Grid container alignItems={'center'} style={{paddingTop: '15px', paddingLeft: '15px', paddingRight: '15px', textAlign: 'center', position: 'absolute', top: '0px', right: '0px', width: '750px', maxWidth: '100%'}}>
+          <Grid item xs={11} style={{zIndex: '0'}}/>
           <Grid item xs={1} style={{textAlign: 'center', cursor: 'pointer'}} alignItems={'center'} onClick={()=>{
             reload();
           }}>
@@ -88,7 +88,7 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart, setIndex1, setIndex2, 
           <p style={{fontSize: '10pt', margin: '0', paddingTop: '10px', paddingBottom: '10px', height: '100%', textAlign: 'left'}}>
             made by
           </p>
-          <a href='https://keita-miyano.async-studio.com/' target="_blank" rel="noopener noreferrer" style={{height: '30px'}}>
+          <a href='https://keita-miyano.async-studio.com/' target="_blank" rel="noopener noreferrer" style={{height: '30px', zIndex: '10'}}>
             <img src='/logo/logo_keitamiyano_rgb_1-5.png' height='100%'/>
           </a>
         </Grid>
