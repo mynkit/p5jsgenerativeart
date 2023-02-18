@@ -12,7 +12,7 @@ const GenerativeArt: React.FC<Props> = ({ targetPage }) => {
     <div className="App">
       <Sidebar target={target} setTarget={setTarget}/>
       {target==='' ?
-      <Home/>
+      <Home target={target} setTarget={setTarget}/>
       : target==='plankton1' ?
       <Plankton1/>
       : target==='plankton2' ?
