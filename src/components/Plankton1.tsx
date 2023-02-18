@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 type MySketchProps = SketchProps & {
   penSpeed: number;
@@ -18,9 +19,10 @@ type MySketchProps = SketchProps & {
 
 type Props = {
   start: boolean;
+  setTarget: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Plankton1: React.FC<Props> = ({ start }) => {
+const Plankton1: React.FC<Props> = ({ start, setTarget }) => {
   const [penSpeed, setPenSpeed] = useState(1);
   const [penSpeedIndex, setPenSpeedIndex] = useState(0);
   const [pause, setPause] = useState(!start);
@@ -43,9 +45,18 @@ const Plankton1: React.FC<Props> = ({ start }) => {
   return (
     <div>
       <Grid style={{position: 'fixed', width: '100%', maxWidth: '100%', height: '100%'}}>
-        {/* 初期化 */}
+        {/* ホーム画面に戻る */}
         <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', left: '0px', width: '0'}}>
           <Grid item xs={1} alignItems={'center'} style={{textAlign: 'center', cursor: 'pointer'}} onClick={()=>{
+            setTarget('');
+          }}>
+            <ArrowBackIcon fontSize="large"/>
+          </Grid>
+        </Grid>
+        {/* 初期化 */}
+        <Grid container alignItems={'center'} style={{padding: '15px', textAlign: 'center', position: 'absolute', top: '0px', right: '0px', width: '750px', maxWidth: '100%'}}>
+          <Grid item xs={11} />
+          <Grid item xs={1} style={{textAlign: 'center', cursor: 'pointer'}} alignItems={'center'} onClick={()=>{
             setClear(true);
             setPause(true);
           }}>

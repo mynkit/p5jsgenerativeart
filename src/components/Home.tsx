@@ -18,13 +18,16 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart }) => {
   }
   return (
     <div style={{padding: '17px'}}>
-      <p style={{fontSize: '16pt', margin: '0', padding: '0', height: '100%', textAlign: 'left'}}>Generative Art</p>
+      <Grid container justifyContent='left' alignItems='center' style={{columnGap: '10px'}}>
+        {/* <img src='/logo/profile400.jpg' height='35px'/> */}
+        <p style={{fontSize: '16pt', margin: '0', padding: '0', height: '100%', textAlign: 'left'}}>Generative Art</p>
+      </Grid>
       <Grid container justifyContent='left' alignItems='center' style={{columnGap: '0px'}}>
         <p style={{fontSize: '10pt', margin: '0', paddingTop: '10px', paddingBottom: '10px', height: '100%', textAlign: 'left'}}>
           made by
         </p>
         <a href='https://keita-miyano.async-studio.com/' target="_blank" rel="noopener noreferrer" style={{height: '30px'}}>
-          <img src='/logo/logo_keitamiyano_rgb_1-5.png' height='100%'></img>
+          <img src='/logo/logo_keitamiyano_rgb_1-5.png' height='100%'/>
         </a>
       </Grid>
       <Grid container justifyContent='center' style={{columnGap: '20px', rowGap: '5px'}}>
