@@ -20,11 +20,12 @@ type MySketchProps = SketchProps & {
 type Props = {
   start: boolean;
   setTarget: React.Dispatch<React.SetStateAction<string>>;
+  index: number;
 }
 
-const Plankton2: React.FC<Props> = ({ start, setTarget }) => {
+const Plankton2: React.FC<Props> = ({ start, setTarget, index }) => {
   const [yFreq, setYFreq] = useState(1.5);
-  const [yFreqIndex, setYFreqIndex] = useState(2);
+  const [yFreqIndex, setYFreqIndex] = useState(index);
   const [pause, setPause] = useState(!start);
   const [clear, setClear] = useState(!start);
   const yFreqList = [

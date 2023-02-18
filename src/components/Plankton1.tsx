@@ -20,11 +20,12 @@ type MySketchProps = SketchProps & {
 type Props = {
   start: boolean;
   setTarget: React.Dispatch<React.SetStateAction<string>>;
+  index: number;
 }
 
-const Plankton1: React.FC<Props> = ({ start, setTarget }) => {
+const Plankton1: React.FC<Props> = ({ start, setTarget, index }) => {
   const [penSpeed, setPenSpeed] = useState(1);
-  const [penSpeedIndex, setPenSpeedIndex] = useState(0);
+  const [penSpeedIndex, setPenSpeedIndex] = useState(index);
   const [pause, setPause] = useState(!start);
   const [clear, setClear] = useState(!start);
   const penSpeedList = [

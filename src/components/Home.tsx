@@ -1,21 +1,67 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Grid from '@mui/material/Grid';
 
 type HomeProps = {
   setTarget: React.Dispatch<React.SetStateAction<string>>;
   setStart: React.Dispatch<React.SetStateAction<boolean>>;
+  setIndex1: React.Dispatch<React.SetStateAction<number>>;
+  setIndex2: React.Dispatch<React.SetStateAction<number>>;
+  setIndex3: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const randint = (min: number, max: number) => {
   return Math.floor( Math.random() * (max + 1 - min) ) + min;
 }
 
-const Home: React.FC<HomeProps> = ({ setTarget, setStart }) => {
+const Home: React.FC<HomeProps> = ({ setTarget, setStart, setIndex1, setIndex2, setIndex3 }) => {
+  const [randints, setRandints] = useState([1,1,1]);
   const imgClick = (target: string)  => {
     setTarget(target);
     setStart(true);
     window.history.replaceState(null,'',`/${target}`);
   }
+  useEffect(() => {
+    setRandints([
+      randint(1,3),
+      randint(1,3),
+      randint(1,3),
+    ]);
+  }, [])
+  useEffect(() => {
+    switch (randints[0]) {
+      case 1:
+        setIndex1(0);
+        break;
+      case 2:
+        setIndex1(5);
+        break;
+      case 3:
+        setIndex1(6);
+        break;      
+    }
+    switch (randints[1]) {
+      case 1:
+        setIndex2(2);
+        break;
+      case 2:
+        setIndex2(7);
+        break;
+      case 3:
+        setIndex2(3);
+        break;      
+    }
+    switch (randints[2]) {
+      case 1:
+        setIndex3(1);
+        break;
+      case 2:
+        setIndex3(4);
+        break;
+      case 3:
+        setIndex3(5);
+        break;      
+    }
+  }, [randints])
   return (
     <div style={{padding: '17px'}}>
       <Grid container justifyContent='left' alignItems='center' style={{columnGap: '10px'}}>
@@ -31,11 +77,11 @@ const Home: React.FC<HomeProps> = ({ setTarget, setStart }) => {
         </a>
       </Grid>
       <Grid container justifyContent='center'>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton1-${randint(1,3)}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton2-${randint(1,3)}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
+        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton1-${randints[0]}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
+        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton2-${randints[1]}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
       </Grid>
       <Grid container justifyContent='center'>
-        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton3-${randint(1,3)}.png`} alt="plankton3" onClick={()=>imgClick('plankton3')}/>
+        <img style={{width: '600px', maxWidth: '60%', cursor: 'pointer', margin: '5px'}} src={`/thumb/plankton3-${randints[2]}.png`} alt="plankton3" onClick={()=>imgClick('plankton3')}/>
       </Grid>
     </div>
   )
