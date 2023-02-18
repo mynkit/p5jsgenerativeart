@@ -6,7 +6,11 @@ type HomeProps = {
   setTarget: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Home: React.FC<HomeProps> = ({ target, setTarget }) => {
+const randint = (min: number, max: number) => {
+  return Math.floor( Math.random() * (max + 1 - min) ) + min;
+}
+
+const Home: React.FC<HomeProps> = ({ setTarget }) => {
   const imgClick = (target: string)  => {
     setTarget(target);
     window.history.replaceState(null,'',`/${target}`);
@@ -17,8 +21,8 @@ const Home: React.FC<HomeProps> = ({ target, setTarget }) => {
         <p style={{fontSize: '16pt', margin: '0', padding: '0', height: '100%', textAlign: 'center'}}>Generative Art</p>
       </Grid>
       <Grid container justifyContent='center' style={{columnGap: '20px', rowGap: '5px'}}>
-        <img style={{width: '800px', maxWidth: '60%', cursor: 'pointer'}} src="/thumb/plankton1.png" alt="plankton1" onClick={()=>imgClick('plankton1')}/>
-        <img style={{width: '800px', maxWidth: '60%', cursor: 'pointer'}} src="/thumb/plankton2.png" alt="plankton2" onClick={()=>imgClick('plankton2')}/>
+        <img style={{width: '800px', maxWidth: '60%', cursor: 'pointer'}} src={`/thumb/plankton1-${randint(1,2)}.png`} alt="plankton1" onClick={()=>imgClick('plankton1')}/>
+        <img style={{width: '800px', maxWidth: '60%', cursor: 'pointer'}} src={`/thumb/plankton2-${randint(1,2)}.png`} alt="plankton2" onClick={()=>imgClick('plankton2')}/>
       </Grid>
     </div>
   )
